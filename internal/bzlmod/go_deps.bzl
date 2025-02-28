@@ -712,6 +712,10 @@ Mismatch between versions requested for Go module {module}:
 
         go_repository(**go_repository_args)
 
+    if hasattr(module_ctx, "is_dev_dependency"):
+        root_module_direct_dev_deps = root_module_direct_deps
+        root_module_direct_deps = {}
+
     # Create a synthetic WORKSPACE file that lists all Go repositories created
     # above and contains all the information required by Gazelle's -repo_config
     # to generate BUILD files for external Go modules. This skips the need to
